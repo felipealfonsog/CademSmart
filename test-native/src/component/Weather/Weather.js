@@ -10,8 +10,12 @@ import { CADEM_COLOR_BLUE } from '../../constants/index';
 
 //----------------------------------------------------------------------------
 // RC 1.0.1 - Por Felipe Gonzalez Soft. Engr. / Developer
-// necesito definir las acciones constantes en un archivo separado.
+// I need to define the constant acctions in a separate file. 
+
 import { CHECK_CITY_WEATHER } from '../actionTypes'
+
+// I'm not sure if this is gonna work or not, but I'm trying to figure out how to.
+
 
 export default class Weather extends Model {
   static get fields() {
@@ -24,18 +28,18 @@ export default class Weather extends Model {
   }
 
   static get modelName() {
-      return 'WeatherInfo';
+      return 'Weather';
   }
 
-  static reducer(action, WeatherInfo, session) {
+  static reducer(action, Weather, cityData) {
       switch(action.type){
           case CHECK_CITY_WEATHER:
-          const weatherInfoID = action.weatherInfo[0].MobileLink.split("/")[6];
+          const weatherInfoID = action.weather[0].MobileLink.split("/")[6];
           WeatherInfo.create({
               id: weatherInfoID,
               previsionText: action.weatherInfo[0].WeatherText,
-              iconId: action.weatherInfo[0].WeatherIcon,
-              temperature: action.weatherInfo[0].Temperature.Metric.Value,
+              iconId: action.weatherInfo[0].icon,
+              temperature: action.time[0].temps.humedad.Value,
           });
           break;
       }
@@ -89,7 +93,7 @@ class Weather extends Component {
         
           <XAxis
             style={{ marginHorizontal: -10, marginLeft: 30 }}
-            datatime={ data } /* possible error en esta varible, fue cambiada por 'datatime' */
+            data={ time } /*  */
             xAccesor={({ value }) => value }
             formatLabel={ (value) => moment(value).format('HH:mm') }
             contentInset={{ left: 20, right: 20 }}
@@ -99,7 +103,7 @@ class Weather extends Component {
             }}
           />
         </View>
-        { console.log(datatime) }
+        { console.log(data) }
       </View>
     );
   }
