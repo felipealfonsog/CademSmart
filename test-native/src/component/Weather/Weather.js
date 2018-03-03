@@ -8,6 +8,43 @@ import moment from 'moment';
 
 import { CADEM_COLOR_BLUE } from '../../constants/index';
 
+//----------------------------------------------------------------------------
+// RC 1.0.1 - Por Felipe Gonzalez Soft. Engr. / Developer
+// necesito definir las acciones constantes en un archivo separado.
+import { CHECK_CITY_WEATHER } from '../actionTypes'
+
+export default class Weather extends Model {
+  static get fields() {
+      return {
+          id: attr(),
+          previsionText: attr(),
+          iconId: attr(),
+          temperature: attr(),
+      }
+  }
+
+  static get modelName() {
+      return 'WeatherInfo';
+  }
+
+  static reducer(action, WeatherInfo, session) {
+      switch(action.type){
+          case CHECK_CITY_WEATHER:
+          const weatherInfoID = action.weatherInfo[0].MobileLink.split("/")[6];
+          WeatherInfo.create({
+              id: weatherInfoID,
+              previsionText: action.weatherInfo[0].WeatherText,
+              iconId: action.weatherInfo[0].WeatherIcon,
+              temperature: action.weatherInfo[0].Temperature.Metric.Value,
+          });
+          break;
+      }
+  }
+}
+
+// 
+// ---------------------------------
+
 class Weather extends Component {
   renderWeather(cityData) {
     const city = cityData.city.name;
@@ -49,9 +86,10 @@ class Weather extends Component {
           />
         </View>
         <View style={{ height: 10 }}>
+        
           <XAxis
             style={{ marginHorizontal: -10, marginLeft: 30 }}
-            data={ time }
+            datatime={ data } /* possible error en esta varible, fue cambiada por 'datatime' */
             xAccesor={({ value }) => value }
             formatLabel={ (value) => moment(value).format('HH:mm') }
             contentInset={{ left: 20, right: 20 }}
@@ -61,7 +99,7 @@ class Weather extends Component {
             }}
           />
         </View>
-        { console.log(time) }
+        { console.log(datatime) }
       </View>
     );
   }
@@ -84,3 +122,6 @@ export default connect(mapStateToProps)(Weather);
 Weather.propTypes = {
   weather: PropTypes.array,
 };
+
+
+// /
