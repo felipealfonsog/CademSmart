@@ -12,6 +12,11 @@ import { CADEM_COLOR_BLUE } from '../../constants/index';
 // RC 1.0.1 - Por Felipe Gonzalez Soft. Engr. / Developer
 // I need to define the constant acctions in a separate file. 
 
+
+
+
+// -----------
+
 import { CHECK_CITY_WEATHER } from '../actionTypes'
 
 // I'm not sure if this is gonna work or not, but I'm trying to figure out how to.
