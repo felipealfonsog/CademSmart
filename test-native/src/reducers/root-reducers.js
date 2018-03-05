@@ -9,7 +9,7 @@ import { FILL_CITY_AUTOCOMPLETE, OPEN_CITY_LIST,
 export const root = (state = { cityList: [], selectCityInputOpened: false, selectedCity: '', weatherInfo: null }, action) => {
         switch (action.type) {
             case OPEN_CITY_LIST:
-            return {cityList: [], selectCityInputOpened: true, weatherInfo: null };
+            return {cityList: [], selectCityInputOpened: true, weather: null };
             case CLOSE_CITY_LIST:
             return { cityList: [], selectCityInputOpened: false, selectedCity: '', weatherInfo: null };
             default:

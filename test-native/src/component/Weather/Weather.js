@@ -14,10 +14,6 @@ import { CADEM_COLOR_BLUE } from '../../constants/index';
 
 
 
-
-
-
-
 // -----------
 
 import { CHECK_CITY_WEATHER } from '../actionTypes'
@@ -42,9 +38,9 @@ export default class Weather extends Model {
   static reducer(action, Weather, cityData) {
       switch(action.type){
           case CHECK_CITY_WEATHER:
-          const weatherInfoID = action.weather[0].MobileLink.split("/")[6];
-          WeatherInfo.create({
-              id: weatherInfoID,
+          const weatherID = action.weather[0].MobileLink.split("/")[6];
+          Weather.create({
+              id: weatherID,
               previsionText: action.weatherInfo[0].WeatherText,
               iconId: action.weatherInfo[0].icon,
               temperature: action.time[0].temps.humedad.Value,
