@@ -19,6 +19,7 @@ import { createStore } from 'redux';
 // load the reducers 
 import reducers from '../root-reducers.js';
 
+// °°°°||||°°°°°°°°°°°°°°°°°°°°
 import {EnterName} from '../component/Component_class.js';
 var EnterName = require('../component/Component_class');
 
@@ -40,7 +41,7 @@ export default class Weather extends Model {
   static get modelName() {
       return 'Weather';
   }
-
+// °*°*°**°*°
   static reducer(action, Weather, cityData) {
       switch(action.type){
           case CHECK_CITY_WEATHER:
